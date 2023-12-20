@@ -1,9 +1,0 @@
-Functional:
-1. user can play the music
-2. user can add music to playlist
-3. user can like the song
-3. user can see the history of music that they play before 
-
-model: song (name, artist, duration, like) ,playlist (name, song, and user) ( manytomany relationship with song ), history ( user, song, listened_at )
-
-api = spotify api ( https://developer.spotify.com/documentation/web-api )
