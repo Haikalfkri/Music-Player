@@ -1,0 +1,18 @@
+.music-container {
+    margin-top: 30px;
+    margin-bottom: 3%;
+}
+
+.song-image {
+    width: 400px;
+}
+
+.audio-playlist {
+    display: flex;
+    margin-top: 60px;
+    justify-content: space-between;
+}
+
+.audio-playlist button {
+    border-radius: 20px;
+}

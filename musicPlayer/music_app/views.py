@@ -4,3 +4,8 @@ from django.shortcuts import render
 def index(request):
     context = {}
     return render(request, "music_app/music.html", context=context)
+
+
+def playlist(request):
+    context = {}
+    return render(request, "music_app/playlist.html", context=context)
