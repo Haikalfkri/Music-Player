@@ -5,6 +5,8 @@
 
 .song-image {
     width: 400px;
+    height: 250px;
+    border-radius: 20px;
 }
 
 .audio-playlist {
@@ -15,4 +17,11 @@
 
 .audio-playlist button {
     border-radius: 20px;
+}
+
+.row-song {
+    box-shadow:hsl(0, 0%, 80%) 0 0 16px;;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 8px;
 }

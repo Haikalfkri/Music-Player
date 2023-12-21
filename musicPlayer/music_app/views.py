@@ -1,9 +1,14 @@
 from django.shortcuts import render
+from .models import *
 
 # Create your views here.
 def index(request):
-    context = {}
+    songs = Song.objects.all()
+    context = {
+        'songs': songs
+    }
     return render(request, "music_app/music.html", context=context)
+
 
 
 def playlist(request):

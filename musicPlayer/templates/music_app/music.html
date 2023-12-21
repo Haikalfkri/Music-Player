@@ -4,51 +4,25 @@
 {% block content %}
 
     <div class="container music-container">
-        <div class="row" style="margin-top: 20px;">
+        {% for song in songs %}
+        <div class="row row-song" style="margin-top: 20px;">
             <div class="col-md-5">
-                <img src="{% static 'images/bad-liar.jpg' %}" alt="" class="song-image">
+                {% if song.imageURL %}
+                <img src="{{ song.imageURL }}" alt="" class="song-image">
+                {% endif %}
             </div>
             <div class="col-md-7">
-                <h2><strong>Bad Liar</strong></h2>
-                <h5><strong>Artist: Coldplay</strong></h5>
+                <h2><strong>{{song.title}}</strong></h2>
+                <h5><strong>Artist: {{song.artist}}</strong></h5>
                 <div class="audio-playlist">
                     <audio controls>
-                        <source src="" type="audio/,pg">
+                        <source src="{{ song.audioURL }}" type="audio/mpeg">
                     </audio>
                     <button class="btn btn-outline-success">+ playlist</button>
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
-            <div class="col-md-5">
-                <img src="{% static 'images/bad-liar.jpg' %}" alt="" class="song-image">
-            </div>
-            <div class="col-md-7">
-                <h2><strong>Bad Liar</strong></h2>
-                <h5><strong>Artist: Coldplay</strong></h5>
-                <div class="audio-playlist">
-                    <audio controls>
-                        <source src="" type="audio/,pg">
-                    </audio>
-                    <button class="btn btn-outline-success">+ playlist</button>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="margin-top: 20px;">
-            <div class="col-md-5">
-                <img src="{% static 'images/bad-liar.jpg' %}" alt="" class="song-image">
-            </div>
-            <div class="col-md-7">
-                <h2><strong>Bad Liar</strong></h2>
-                <h5><strong>Artist: Coldplay</strong></h5>
-                <div class="audio-playlist">
-                    <audio controls>
-                        <source src="" type="audio/,pg">
-                    </audio>
-                    <button class="btn btn-outline-success">+ playlist</button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 
 {% endblock %}
