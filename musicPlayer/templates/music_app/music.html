@@ -18,11 +18,35 @@
                     <audio controls>
                         <source src="{{ song.audioURL }}" type="audio/mpeg">
                     </audio>
-                    <button class="btn btn-outline-success">+ playlist</button>
+                    <button class="btn btn-outline-success" onclick="addToPlaylist('{{ song.id }}')">+ playlist</button>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+
+
+    <script>
+
+        function addToPlaylist(songId) {
+            var csrftoken = getCookie('csrftoken')
+            $.ajax({
+                url: '/add-to-playlist/' + songId + '/',
+                type: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                success: function(response) {
+                    alert(response.message)
+                    window.location.reload()
+                },
+                error: function(error) {
+                    alert('Error', error)
+                },
+            })
+        }
+
+    </script>
 
 {% endblock %}

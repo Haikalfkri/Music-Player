@@ -4,36 +4,48 @@
 {% block content %}
 
     <div class="container music-container">
-        <div class="row" style="margin-top: 20px;">
-            <div class="col-md-5">
-                <img src="{% static 'images/bad-liar.jpg' %}" alt="" class="song-image">
-            </div>
-            <div class="col-md-7">
-                <h2><strong>Bad Liar</strong></h2>
-                <h5><strong>Artist: Coldplay</strong></h5>
-                <div class="audio-playlist">
-                    <audio controls>
-                        <source src="" type="audio/,pg">
-                    </audio>
-                    <button class="btn btn-outline-danger">remove</button>
+        {% for playlist in playlists %}
+            {% for song in playlist.songs.all %}
+                <div class="row row-song" style="margin-top: 20px;">
+                    <div class="col-md-5">
+                        <img src="{{ song.imageURL }}" alt="{{ song.title }}" class="song-image">
+                    </div>
+                    <div class="col-md-7">
+                        <h2><strong>{{ song.title }}</strong></h2>
+                        <h5><strong>Artist: {{ song.artist }}</strong></h5>
+                        <div class="audio-playlist">
+                            <audio controls>
+                                <source src="{{ song.audioURL }}" type="audio/mpeg">
+                            </audio>
+                            <button class="btn btn-outline-danger"  onclick="deletePlaylist('{{ song.id }}')">Remove</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row" style="margin-top: 20px;">
-            <div class="col-md-5">
-                <img src="{% static 'images/bad-liar.jpg' %}" alt="" class="song-image">
-            </div>
-            <div class="col-md-7">
-                <h2><strong>Bad Liar</strong></h2>
-                <h5><strong>Artist: Coldplay</strong></h5>
-                <div class="audio-playlist">
-                    <audio controls>
-                        <source src="" type="audio/,pg">
-                    </audio>
-                    <button class="btn btn-outline-danger">remove</button>
-                </div>
-            </div>
-        </div>
+            {% endfor %}
+        {% endfor %}
     </div>
+
+    <script>
+    
+        function deletePlaylist(songID) {
+            var csrftoken = getCookie('csrftoken');
+            $.ajax({
+                url: '/delete-playlist/' + songID + '/',
+                type: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                success: function(response) {
+                    alert(response.message),
+                    window.location.reload();
+                },
+                error: function(error) {
+                    alert('Error', error);
+                }
+            });
+        }
+
+    </script>
 
 {% endblock %}
