@@ -6,10 +6,18 @@ from django.http import JsonResponse
 # Create your views here.
 def index(request):
     songs = Song.objects.all()
+    
+    search_song = request.GET.get('search')
+    
+    if search_song != '' and search_song is not None:
+        songs = Song.objects.filter(title__icontains=search_song) or Song.objects.filter(artist__icontains=search_song)
+    else:
+        songs = Song.objects.all().order_by()
     context = {
         'songs': songs,
     }
     return render(request, "music_app/music.html", context=context)
+
 
 def playlist(request):
     user = request.user
