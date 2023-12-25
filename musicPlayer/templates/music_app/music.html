@@ -18,7 +18,11 @@
                     <audio controls>
                         <source src="{{ song.audioURL }}" type="audio/mpeg">
                     </audio>
-                    <button class="btn btn-outline-success" onclick="addToPlaylist('{{ song.id }}')">+ playlist</button>
+                    {% if user.is_authenticated %}
+                        <button class="btn btn-outline-success" onclick="addToPlaylist('{{ song.id }}')">+ playlist</button>
+                    {% else %}
+                        <p><strong>Login first</strong></p>
+                    {% endif %}
                 </div>
             </div>
         </div>

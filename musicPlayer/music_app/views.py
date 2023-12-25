@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -18,7 +19,7 @@ def index(request):
     }
     return render(request, "music_app/music.html", context=context)
 
-
+@login_required
 def playlist(request):
     user = request.user
     playlists = Playlist.objects.filter(user=user)
